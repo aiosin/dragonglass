@@ -8,7 +8,6 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 @get('/')
 def index():
-	print db
 	return template("index", title = "dragonglass")
 
 
@@ -18,7 +17,7 @@ def server_static(filename):
 
 @get('/id/<id>')
 def getFromID(id):
-	return template("id", filltext=retrieveText(id), title="Your dragonglass from: TODO")
+	return template("id", filltext=retrieveText(id), ID=id, title="Your dragonglass from: TODO")
 
 
 @post('/')
@@ -34,7 +33,6 @@ def submit():
 
 def retrieveText(id):
 	value = db.get(id)
-	print value
 	return value
 
 
