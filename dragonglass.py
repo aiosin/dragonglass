@@ -1,6 +1,7 @@
 from bottle import *
 import hashlib
 import time
+import sqlite3
 
 db = {'test':'pass', 'anothertest': 'passaswell'}
 current_milli_time = lambda: int(round(time.time() * 1000))
@@ -46,6 +47,7 @@ def stringToHash(string):
 
 
 #TODO avoid collision
+#https://www.tutorialspoint.com/sqlite/sqlite_python.htm
 def storeText(string):
 	hashstring = stringToHash(string)
 	db[hashstring] = string
@@ -53,5 +55,12 @@ def storeText(string):
 	print string
 	return hashstring
 
+def main():
+	conn = sqlite3.connect('dragondata.db')
+	print conn
+	run(host='localhost', port=8080,debug="true")
 
-run(host='localhost', port=8080,debug="true")
+
+if __name__ == '__main__':
+	main()
+
